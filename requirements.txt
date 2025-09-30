@@ -1,0 +1,7 @@
+websockets>=11.0
+httpx>=0.24.0
+pysocks>=1.7.1
+brotli>=1.0.9
+aiohttp>=3.8.0
+pyyaml>=6.0
+requests>=2.27.0

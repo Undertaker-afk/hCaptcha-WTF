@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Captcha Auto-Solver</title>
+    <style>
+        body {
+            width: 350px;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+        }
+        
+        h1 {
+            margin: 0 0 20px 0;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .status {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.connected {
+            background: #4CAF50;
+        }
+        
+        .status-dot.disconnected {
+            background: #f44336;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button.primary {
+            background: rgba(76, 175, 80, 0.8);
+        }
+        
+        button.primary:hover {
+            background: rgba(76, 175, 80, 1);
+        }
+        
+        .info {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 15px;
+            opacity: 0.8;
+        }
+        
+        .stats {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+        
+        .stats div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔓 Captcha Solver</h1>
+    
+    <div class="status">
+        <div class="status-indicator">
+            <div class="status-dot disconnected" id="statusDot"></div>
+            <span id="statusText">Python-Client: Getrennt</span>
+        </div>
+        <div style="font-size: 12px; opacity: 0.8;">
+            WebSocket: localhost:8765
+        </div>
+    </div>
+    
+    <div class="buttons">
+        <button class="primary" id="solveBtn">
+            🎯 Captcha Jetzt Lösen
+        </button>
+        <button id="toggleBtn">
+            ⏸️ Auto-Solve Pausieren
+        </button>
+        <button id="reconnectBtn">
+            🔄 Neu Verbinden
+        </button>
+    </div>
+    
+    <div class="stats">
+        <div>
+            <span>Gelöst (Sitzung):</span>
+            <span id="solvedCount">0</span>
+        </div>
+        <div>
+            <span>Erfolgsrate:</span>
+            <span id="successRate">0%</span>
+        </div>
+    </div>
+    
+    <div class="info">
+        Made with ❤️ for bypassing broken captchas
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
